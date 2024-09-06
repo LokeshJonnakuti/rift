@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import random
 from asyncio import Future
 from dataclasses import dataclass, field
 from typing import Any, ClassVar, Dict, Optional
@@ -10,6 +9,7 @@ from rift.agents.abstract import AgentProgress  # AgentTask,
 from rift.agents.abstract import Agent, AgentParams, AgentRunResult, AgentState, agent
 from rift.server.selection import RangeSet
 from rift.util.TextStream import TextStream
+import secrets
 
 logger = logging.getLogger(__name__)
 
@@ -101,7 +101,7 @@ def quicksort(nums: List[int]) -> List[int]:
         async def create_dummy_text_stream(msg: str):
             cursor = 0
             while True:
-                chunk_size = random.choice(range(5)) + 1
+                chunk_size = secrets.choice(range(5)) + 1
                 await asyncio.sleep(0.25)
                 yield msg[cursor : cursor + chunk_size]
                 cursor += chunk_size
